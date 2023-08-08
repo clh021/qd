@@ -12,6 +12,9 @@ services:
       - "8923:80"
     volumes:
       - "./config:/usr/src/app/config"
+      - "./srv/db/db_converter.py:/usr/src/app/db/db_converter.py"
+      - "./srv/web/tpl/register.html:/usr/src/app/web/tpl/register.html"
+      # - "./srv/web/handlers/login.py:/usr/src/app/web/handlers/login.py"
     environment:
       # - QD_DEBUG=False
       # - BIND=0.0.0.0
@@ -23,7 +26,7 @@ services:
       # - DISPLAY_IMPORT_WARNING=True
       # - USER0ISADMIN=True
       # - STATIC_URL_PREFIX=/static/
-      - DOMAIN=
+      - DOMAIN=http://localhost:8923
       # - COOKIE_DAY=5
       # - COOKIE_SECURE_MODE=False
       - COOKIE_SECRET=binux
