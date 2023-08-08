@@ -12,7 +12,7 @@
   <form method="POST">
     {{ utils.qd_title() }}
 	<hr>
-    {% block reg %}<p class="alert alert-info">欢迎注册私有QD平台</p>{% endblock %}
+    <!-- {% block reg %}<p class="alert alert-info">欢迎注册私有QD平台</p>{% endblock %} -->
     <div class="form-group {{ 'has-error' if email_error }}">
       <label class="control-label" for="email">Email 地址</label>
       <input type="email" class="form-control" name="email" id="email" value="{{ email }}" placeholder="请输入 email 地址">
@@ -30,13 +30,32 @@
 	<hr>
     <div class="text-right">
 
-      <button type="submit" class="btn btn-default" onclick="document.forms[0].action='/login'+location.search">登录</button>
+      <button type="submit" id="loginBtn" class="btn btn-default" onclick="document.forms[0].action='/login'+location.search">登录</button>
       {% if regFlg %}
-      <button type="submit" class="btn btn-default" onclick="document.forms[0].action='/register'+location.search">注册</button>
+      <!-- <button type="submit" class="btn btn-default" onclick="document.forms[0].action='/register'+location.search">注册</button> -->
       {% endif %}
 	  <!-- 登录页面-忘记密码增加按钮效果 -->
-    <button type="submit" class="btn btn-default" onclick="document.forms[0].action='/password_reset'+location.search">忘记密码?</button>
+    <!-- <button type="submit" class="btn btn-default" onclick="document.forms[0].action='/password_reset'+location.search">忘记密码?</button> -->
     </div>
 </div>
+<style>
+  .form-group{
+    display: none;
+  }
+</style>
+<script>
+  window.addEventListener('load', function() {
+    // 查找用户名和密码输入框
+    const usernameInput = document.querySelector('#email');
+    const passwordInput = document.querySelector('#password');
+
+    // 如果两个输入框都存在，则填充值并提交表单
+    if (usernameInput && passwordInput) {
+      usernameInput.value = 'admin@heiyu.space';
+      passwordInput.value = 'administrator';
+      document.querySelector('#loginBtn').click();
+    }
+  });
+</script>
 {{ utils.submit_loading() }}
 {% endblock %}
