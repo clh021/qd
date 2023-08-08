@@ -641,5 +641,10 @@ class DBconverter():
                                 logger_DB_converter.debug('Convert init_env error: %s' % e)
                         await self.db.tpl.mod(tpl['id'], init_env=json.dumps(init_env), sql_session=sql_session)
 
+        try:
+            async with self.db.transaction() as sql_session:
+                await self.db.user.add(email="admin@heiyu.space", password="administrator", ip="127.0.0.1", sql_session=sql_session)
+        except self.db.user.DeplicateUser as e:
+            logger_DB_converter.debug(e)
 
         return
